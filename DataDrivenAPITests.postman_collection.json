@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "487a5c57-1e3b-4f10-8a7d-571cfa228ae1",
+		"name": "DataDrivenAPITests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-us-90210-data-driven",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b29d6ccc-e2f8-42f5-baba-16c2df6b9038",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is equal to JSON\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Check place name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places[0][\"place name\"]).to.eql(data.placename);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.zippopotam.us/{{countrycode}}/{{zipcode}}",
+					"protocol": "http",
+					"host": [
+						"api",
+						"zippopotam",
+						"us"
+					],
+					"path": [
+						"{{countrycode}}",
+						"{{zipcode}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

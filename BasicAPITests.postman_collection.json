@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "871dbf85-9eda-4d81-9f81-a079e42877d0",
+		"name": "BasicAPITests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET-us-90210",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b367fbf-2c0d-4f44-adb8-f5e6ad9ca328",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Check that country is equal to United States\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.country).to.eql('United States');",
+							"});",
+							"",
+							"pm.test(\"Check that place name is equal to Beverly Hills\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places[0]['place name']).to.eql('Beverly Hills');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.zippopotam.us/us/90210",
+					"protocol": "http",
+					"host": [
+						"api",
+						"zippopotam",
+						"us"
+					],
+					"path": [
+						"us",
+						"90210"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
